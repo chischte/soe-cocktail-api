@@ -1,6 +1,3 @@
-USE master
-GO
-
 CREATE DATABASE cocktail_db
 GO
 
