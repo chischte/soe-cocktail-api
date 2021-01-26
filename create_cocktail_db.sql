@@ -11,12 +11,6 @@ GO
 USE cocktail_db
 GO
 
---SET ANSI_NULLS ON
---GO
-
-----SET QUOTED_IDENTIFIER ON
---GO
-
 CREATE TABLE [dbo].[stagging](
 	[idDrink] [NVARCHAR](100) NULL,
 	[strDrink] [NVARCHAR](100) NULL,
@@ -255,15 +249,15 @@ m4.strMeasure AS strMeasure4,
 m5.strMeasure AS strMeasure5,
 strGlass
 FROM drinks d
-LEFT OUTER JOIN glasses g ON d.idGlass=g.idGlass
-LEFT OUTER JOIN ingredients i1 ON i1.idIngredient=d.idIngredient1 
-LEFT OUTER JOIN ingredients i2 ON i2.idIngredient=d.idIngredient2
-LEFT OUTER JOIN ingredients i3 ON i3.idIngredient=d.idIngredient3
-LEFT OUTER JOIN ingredients i4 ON i4.idIngredient=d.idIngredient4
-LEFT OUTER JOIN ingredients i5 ON i5.idIngredient=d.idIngredient5
-LEFT OUTER JOIN measures m1 ON m1.idMeasure=d.idMeasureIngredient1
-LEFT OUTER JOIN measures m2 ON m2.idMeasure=d.idMeasureIngredient2
-LEFT OUTER JOIN measures m3 ON m3.idMeasure=d.idMeasureIngredient3
-LEFT OUTER JOIN measures m4 ON m4.idMeasure=d.idMeasureIngredient4
-LEFT OUTER JOIN measures m5 ON m5.idMeasure=d.idMeasureIngredient5
+LEFT JOIN glasses g ON d.idGlass=g.idGlass
+LEFT JOIN ingredients i1 ON i1.idIngredient=d.idIngredient1 
+LEFT JOIN ingredients i2 ON i2.idIngredient=d.idIngredient2
+LEFT JOIN ingredients i3 ON i3.idIngredient=d.idIngredient3
+LEFT JOIN ingredients i4 ON i4.idIngredient=d.idIngredient4
+LEFT JOIN ingredients i5 ON i5.idIngredient=d.idIngredient5
+LEFT JOIN measures m1 ON m1.idMeasure=d.idMeasureIngredient1
+LEFT JOIN measures m2 ON m2.idMeasure=d.idMeasureIngredient2
+LEFT JOIN measures m3 ON m3.idMeasure=d.idMeasureIngredient3
+LEFT JOIN measures m4 ON m4.idMeasure=d.idMeasureIngredient4
+LEFT JOIN measures m5 ON m5.idMeasure=d.idMeasureIngredient5
 GO
