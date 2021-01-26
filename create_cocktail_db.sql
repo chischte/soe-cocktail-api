@@ -242,18 +242,18 @@ GO
 --View to join all tables for html report
 create VIEW vwDrinks
 AS
-SELECT d.idDrink,d.strDrink,d.strInstructions
-,i1.strIngredient AS strIngredient1
-,i2.strIngredient AS strIngredient2
-,i3.strIngredient AS strIngredient3
-,i4.strIngredient AS strIngredient4
-,i5.strIngredient AS strIngredient5
-,m1.strMeasure AS strMeasure1
-,m2.strMeasure AS strMeasure2
-,m3.strMeasure AS strMeasure3
-,m4.strMeasure AS strMeasure4
-,m5.strMeasure AS strMeasure5
-,strGlass
+SELECT d.idDrink,d.strDrink,d.strInstructions,
+i1.strIngredient AS strIngredient1,
+i2.strIngredient AS strIngredient2,
+i3.strIngredient AS strIngredient3,
+i4.strIngredient AS strIngredient4,
+i5.strIngredient AS strIngredient5,
+m1.strMeasure AS strMeasure1,
+m2.strMeasure AS strMeasure2,
+m3.strMeasure AS strMeasure3,
+m4.strMeasure AS strMeasure4,
+m5.strMeasure AS strMeasure5,
+strGlass
 FROM drinks d
 LEFT OUTER JOIN glasses g ON d.idGlass=g.idGlass
 LEFT OUTER JOIN ingredients i1 ON i1.idIngredient=d.idIngredient1 
