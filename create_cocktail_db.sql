@@ -1,10 +1,16 @@
+-- =============================================================================
+-- Author:      Michael Wettstein
+-- Create date: 23.12.2020
+-- Description: Create database, tables, trigger and view for scripting project
+--              >>COCKTAIL-API<<
+-- =============================================================================
+
 CREATE DATABASE cocktail_db
 GO
 
 USE [cocktail_db]
 GO
 
-/****** Object:  Table [dbo].[stagging]    Script Date: 12/11/2020 10:38:50 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -69,16 +75,13 @@ CREATE TABLE [dbo].[stagging](
 
 GO
 
-
-/****** Object:  Table [dbo].[recipe]    Script Date: 12/9/2020 9:51:01 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
---drop table drinks
---Drinks table
+--drinks table
 CREATE TABLE [dbo].[drinks](
 	[idDrink] [nvarchar](100) NOT NULL PRIMARY KEY,
 	[strDrink] [nvarchar](100) NULL,
@@ -115,8 +118,8 @@ CREATE TABLE [dbo].[drinks](
 	[idMeasureIngredient14] [int] NULL,
 	[idMeasureIngredient15] [int] NULL
 ) ON [PRIMARY]
-
 GO
+
 --ingredients master
 CREATE TABLE ingredients
 (idIngredient INT IDENTITY,
@@ -135,15 +138,14 @@ CREATE TABLE glasses
 strGlass NVARCHAR(100) PRIMARY KEY)
 GO
 
-
---Trigger on stagging table to split the table to normalize form 
+--trigger on stagging table to split the table to normalize form 
 CREATE TRIGGER trgStagging ON stagging AFTER INSERT
 AS
 INSERT INTO drinks (idDrink, strDrink,strInstructions)
 SELECT idDrink, strDrink,strInstructions FROM inserted WHERE inserted.idDrink NOT IN (SELECT idDrink FROM drinks)
 
 INSERT INTO glasses 
-SELECT DISTINCT strGlass FROM stagging WHERE strGlass NOT IN (SELECT strGlass FROM glasses) --and strIngredient1 is not null
+SELECT DISTINCT strGlass FROM stagging WHERE strGlass NOT IN (SELECT strGlass FROM glasses) 
 
 UPDATE drinks 
 SET idGlass=glasses.idGlass
@@ -156,7 +158,7 @@ FROM drinks,ingredients,inserted i
 WHERE i.strIngredient1=ingredients.strIngredient AND i.idDrink=drinks.idDrink
 
 INSERT INTO ingredients 
-SELECT DISTINCT strIngredient1 FROM stagging WHERE strIngredient1 NOT IN (SELECT strIngredient FROM ingredients) --and strIngredient1 is not null
+SELECT DISTINCT strIngredient1 FROM stagging WHERE strIngredient1 NOT IN (SELECT strIngredient FROM ingredients) 
 
 UPDATE drinks 
 SET idIngredient1=ingredients.idIngredient
@@ -164,7 +166,7 @@ FROM drinks,ingredients,inserted i
 WHERE i.strIngredient1=ingredients.strIngredient AND i.idDrink=drinks.idDrink
 
 INSERT INTO ingredients 
-SELECT DISTINCT strIngredient2 FROM stagging WHERE strIngredient2 NOT IN (SELECT strIngredient FROM ingredients)  --and strIngredient2 is not null
+SELECT DISTINCT strIngredient2 FROM stagging WHERE strIngredient2 NOT IN (SELECT strIngredient FROM ingredients)  
 
 UPDATE drinks 
 SET idIngredient2=ingredients.idIngredient
@@ -172,15 +174,14 @@ FROM drinks,ingredients,inserted i
 WHERE i.strIngredient2=ingredients.strIngredient AND i.idDrink=drinks.idDrink
 
 INSERT INTO ingredients 
-SELECT DISTINCT strIngredient3 FROM stagging WHERE strIngredient3 NOT IN (SELECT strIngredient FROM ingredients)  --and strIngredient3 is not null
-
+SELECT DISTINCT strIngredient3 FROM stagging WHERE strIngredient3 NOT IN (SELECT strIngredient FROM ingredients)  
 UPDATE drinks 
 SET idIngredient3=ingredients.idIngredient
 FROM drinks,ingredients,inserted i
 WHERE i.strIngredient3=ingredients.strIngredient AND i.idDrink=drinks.idDrink
 
 INSERT INTO ingredients 
-SELECT DISTINCT strIngredient4 FROM stagging WHERE strIngredient4 NOT IN (SELECT strIngredient FROM ingredients)  --and strIngredient4 is not null
+SELECT DISTINCT strIngredient4 FROM stagging WHERE strIngredient4 NOT IN (SELECT strIngredient FROM ingredients)  
 
 UPDATE drinks 
 SET idIngredient4=ingredients.idIngredient
@@ -188,7 +189,7 @@ FROM drinks,ingredients,inserted i
 WHERE i.strIngredient4=ingredients.strIngredient AND i.idDrink=drinks.idDrink
 
 INSERT INTO ingredients 
-SELECT DISTINCT strIngredient5 FROM stagging WHERE strIngredient5 NOT IN (SELECT strIngredient FROM ingredients)  --and strIngredient5 is not null
+SELECT DISTINCT strIngredient5 FROM stagging WHERE strIngredient5 NOT IN (SELECT strIngredient FROM ingredients)  
 
 UPDATE drinks 
 SET idIngredient5=ingredients.idIngredient
@@ -197,7 +198,7 @@ WHERE i.strIngredient5=ingredients.strIngredient AND i.idDrink=drinks.idDrink
 
 --Measure
 INSERT INTO measures 
-SELECT DISTINCT strMeasure1 FROM stagging WHERE strMeasure1 NOT IN (SELECT strMeasure FROM measures)  --and strMeasure1 is not null
+SELECT DISTINCT strMeasure1 FROM stagging WHERE strMeasure1 NOT IN (SELECT strMeasure FROM measures)  
 
 UPDATE drinks 
 SET idMeasureIngredient1=measures.idMeasure
@@ -205,7 +206,7 @@ FROM drinks,measures,inserted i
 WHERE i.strMeasure1=measures.strMeasure AND i.idDrink=drinks.idDrink
 
 INSERT INTO measures 
-SELECT DISTINCT strMeasure2 FROM stagging WHERE strMeasure2 NOT IN (SELECT strMeasure FROM measures) --and strMeasure2 is not null
+SELECT DISTINCT strMeasure2 FROM stagging WHERE strMeasure2 NOT IN (SELECT strMeasure FROM measures) 
 
 UPDATE drinks 
 SET idMeasureIngredient2=measures.idMeasure
@@ -213,7 +214,7 @@ FROM drinks,measures,inserted i
 WHERE i.strMeasure2=measures.strMeasure AND i.idDrink=drinks.idDrink
 
 INSERT INTO measures 
-SELECT DISTINCT strMeasure3 FROM stagging WHERE strMeasure3 NOT IN (SELECT strMeasure FROM measures) --and strMeasure3 is not null
+SELECT DISTINCT strMeasure3 FROM stagging WHERE strMeasure3 NOT IN (SELECT strMeasure FROM measures) 
 
 UPDATE drinks 
 SET idMeasureIngredient3=measures.idMeasure
@@ -221,7 +222,7 @@ FROM drinks,measures,inserted i
 WHERE i.strMeasure3=measures.strMeasure AND i.idDrink=drinks.idDrink
 
 INSERT INTO measures 
-SELECT DISTINCT strMeasure4 FROM stagging WHERE strMeasure4 NOT IN (SELECT strMeasure FROM measures) --and strMeasure4 is not null
+SELECT DISTINCT strMeasure4 FROM stagging WHERE strMeasure4 NOT IN (SELECT strMeasure FROM measures) 
 
 UPDATE drinks 
 SET idMeasureIngredient4=measures.idMeasure
@@ -229,7 +230,7 @@ FROM drinks,measures,inserted i
 WHERE i.strMeasure4=measures.strMeasure AND i.idDrink=drinks.idDrink
 
 INSERT INTO measures 
-SELECT DISTINCT strMeasure5 FROM stagging WHERE strMeasure5 NOT IN (SELECT strMeasure FROM measures) --and strMeasure5 is not null
+SELECT DISTINCT strMeasure5 FROM stagging WHERE strMeasure5 NOT IN (SELECT strMeasure FROM measures) 
 
 UPDATE drinks 
 SET idMeasureIngredient5=measures.idMeasure
@@ -237,7 +238,6 @@ FROM drinks,measures,inserted i
 WHERE i.strMeasure5=measures.strMeasure AND i.idDrink=drinks.idDrink
 
 GO
-
 
 --View to join all tables for html report
 create VIEW vwDrinks
