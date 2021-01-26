@@ -8,14 +8,14 @@
 CREATE DATABASE cocktail_db
 GO
 
-USE [cocktail_db]
+USE cocktail_db
 GO
 
-SET ANSI_NULLS ON
-GO
+--SET ANSI_NULLS ON
+--GO
 
-SET QUOTED_IDENTIFIER ON
-GO
+----SET QUOTED_IDENTIFIER ON
+--GO
 
 CREATE TABLE [dbo].[stagging](
 	[idDrink] [NVARCHAR](100) NULL,
