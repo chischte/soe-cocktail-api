@@ -69,12 +69,6 @@ CREATE TABLE [dbo].[stagging](
 
 GO
 
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 --drinks table
 CREATE TABLE [dbo].[drinks](
 	[idDrink] [nvarchar](100) NOT NULL PRIMARY KEY,

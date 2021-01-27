@@ -47,9 +47,9 @@ foreach ($item in $array) {
     $url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=' + $item
     $response = Invoke-WebRequest -Uri $url -UseBasicParsing
 
-    $result = $response | ConvertFrom-Json  | select -expand drinks #| Select * #| ConvertTo-Json 
+    $result = $response | ConvertFrom-Json  | select -expand drinks 
 
-    ## Insert script to write the API data to the database
+    # Insert script to write the API data to the database
     foreach ($r in $result) {
         $add += "INSERT INTO stagging(idDrink,strDrink,strDrinkAlternate,strIngredient1,strMeasure1,strIngredient2,strMeasure2,strIngredient3,strMeasure3,strIngredient4,strMeasure4,
                                     strIngredient5,strMeasure5,strGlass,strInstructions) 

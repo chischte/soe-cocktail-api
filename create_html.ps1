@@ -11,7 +11,7 @@
   .EXAMPLE
   None
   .NOTES
-  For this script to run, EnhancedHTML2 module has to be installed
+  EnhancedHTML2 module has to be installed
   The pagination does only work on internet explorer
   .LINK
   None
