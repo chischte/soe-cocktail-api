@@ -5,7 +5,7 @@ Michael Wettstein
 27.01.2021 Zürich
 ********************************************************************************
 
-HOW TO USE THE SCRIPTS:
+HOW TO USE:
 
 1) Create a database using the script "create_cocktail_db.sql"
 
@@ -13,13 +13,13 @@ HOW TO USE THE SCRIPTS:
    recipes from the api "https://www.thecocktaildb.com"
    
    Remarks:
- • adjust the parameter $servername to fit your environment
+ • Adjust the parameter $servername to fit your environment
 
 3) Run the powershell script "create_html.ps1" to creat an html page
    displaying the drinks.
 
    Remarks:
- • the pagination of the html page does only work on
+ • The pagination of the html page does only work on
    Internet Explorer, therefore IE has to be selected as default browser.
    see also picture "set_ie_default.jpg".
  • In IE make sure active content is allowed to run files, see also
